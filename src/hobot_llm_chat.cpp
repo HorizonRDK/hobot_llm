@@ -28,20 +28,24 @@
 #define LLM_BLUE(a) LLM_COLOR(a, 34)
 
 int main(int argc, char* argv[]) {
-  if (argc < 3) {
-    printf("Usage: %s <model_path> <tokenizer_path>\n", argv[0]);
+  if (argc != 3 && argc != 1) {
+    printf("Usage: %s [model_path] [tokenizer_path]\n", argv[0]);
     return -1;
   }
   llm::BpuBloomModel model;
-  model.Read(argv[1], argv[2]);
+  if (argc == 3) {
+    model.Read(argv[1], argv[2]);
+  } else {
+    model.Read("/opt/tros/lib/hobot_llm/llm_model",
+               "/opt/tros/lib/hobot_llm/tokenization_bloom_py");
+  }
 
   int cache_size = model.GetCacheSize();
   int vocab_size = model.GetVocabSize();
   std::cout << LLM_RED(
-                   "这是一个基于X3派1.5B大模型的"
-                   "交互演示Demo，请输入你的问题并按下回车，如需重新开始，请输"
-                   "入reset，如需退出"
-                   "请输入exit")
+                   "这是一个地平线RDK平台大模型聊天程序，"
+                   "请输入你的问题并按下回车，如需重新开始请输入reset，"
+                   "如需退出请输入exit")
             << std::endl;
   std::vector<int> output_ids;
   int prev_token_id = -1;

@@ -148,7 +148,7 @@ void HobotLLMNode::MessageProcess(std::string &query) {
         auto message = std_msgs::msg::String();
         message.data = string_public;
         publisher_->publish(message);
-        RCLCPP_INFO_STREAM(this->get_logger(), "Q: " << string_public);
+        RCLCPP_INFO_STREAM(this->get_logger(), "A: " << string_public);
         string_public.clear();
       }
     }

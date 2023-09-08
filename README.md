@@ -1,6 +1,6 @@
 # 1. 功能介绍
 
-**hobot_llm** 是地平线RDK平台集成的端侧**Large Language Model (LLM)** Node，用户可在端侧体验LLM能力。提供两种体验方式，一种订阅文本消息，然后将结果以文本方式发布出去，一种直接在终端输入文本聊天。
+**hobot_llm** 是地平线RDK平台集成的端侧**Large Language Model (LLM)** Node，用户可在端侧体验LLM。目前提供两种体验方式，一种订阅文本消息，然后将结果以文本方式发布出去，一种直接当前终端输入文本聊天体验。
 
 # 2. 物料清单
 
@@ -17,7 +17,7 @@
 - 地平线RDK为4GB内存版本
 - 地平线RDK已烧录好地平线提供的Ubuntu 20.04系统镜像
 - 修改BPU保留内存大小为1.7GB，修改方法参考[在设备树中设置ion_cam size](https://developer.horizon.ai/api/v1/fileData/documents_rdk/system_software_development/driver_develop_guide/18-Memory_Managment_zh_CN.html#ion-cam-size)，修改 alloc-ranges 和 size 属性中的 0x2a000000 为 0x6a400000
-- 安装transformers，命令为 `pip3 install transformers` 
+- 安装transformers，命令为 `pip3 install transformers`
 
 ## 3.2. 安装功能包
 
@@ -46,7 +46,7 @@ hobot_llm提供两个运行程序 hobot_llm 和 hobot_llm_chat，其中 hobot_ll
     ```bash
     source /opt/tros/setup.bash
 
-    ros2 launch hobot_llm hobot_llm
+    ros2 run hobot_llm hobot_llm
     ```
 
 2. 新开一个终端订阅输出结果topic
@@ -73,7 +73,7 @@ source /opt/tros/setup.bash
 ros2 run hobot_llm hobot_llm_chat
 ```
 
-程序启动后，在当前终端输入文字，和机器人聊天。
+程序启动后，可直接在当前终端和机器人聊天。
 
 # 4. 接口说明
 
