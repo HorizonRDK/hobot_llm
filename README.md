@@ -18,6 +18,7 @@
 - 地平线RDK已烧录好地平线提供的Ubuntu 20.04系统镜像
 - 修改BPU保留内存大小为1.7GB，修改方法参考[在设备树中设置ion_cam size](https://developer.horizon.ai/api/v1/fileData/documents_rdk/system_software_development/driver_develop_guide/18-Memory_Managment_zh_CN.html#ion-cam-size)，修改 alloc-ranges 和 size 属性中的 0x2a000000 为 0x6a400000
 - 安装transformers，命令为 `pip3 install transformers`
+- 更新hobot-dnn，命令为 `sudo apt update; sudo apt install hobot-dnn`
 
 ## 3.2. 安装功能包
 
@@ -77,6 +78,8 @@ ros2 run hobot_llm hobot_llm_chat
 
 # 4. 接口说明
 
+hobot_llm 程序接口说明如下：
+
 ## 4.1. 话题
 
 | 名称        | 消息类型            | 说明              |
@@ -96,3 +99,7 @@ ros2 run hobot_llm hobot_llm_chat
 1. 模型加载失败
 
     确认开发板内存为4GB，同时设置BPU保留内存大小为1.7GB。
+
+2. 输出结果乱码
+
+   确认已使用命令`sudo apt update; sudo apt install hobot-dnn`更新 hobot-dnn
