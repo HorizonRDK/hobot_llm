@@ -28,13 +28,13 @@
 #define LLM_BLUE(a) LLM_COLOR(a, 34)
 
 int main(int argc, char* argv[]) {
-  if (argc != 3 && argc != 1) {
-    printf("Usage: %s [model_path] [tokenizer_path]\n", argv[0]);
+  if (argc > 2) {
+    printf("Usage: %s [model_path]\n", argv[0]);
     return -1;
   }
   llm::BpuBloomModel model;
-  if (argc == 3) {
-    model.Read(argv[1], argv[2]);
+  if (argc == 2) {
+    model.Read(argv[1], "/opt/tros/lib/hobot_llm/tokenization_bloom_py");
   } else {
     model.Read("/opt/tros/lib/hobot_llm/llm_model",
                "/opt/tros/lib/hobot_llm/tokenization_bloom_py");

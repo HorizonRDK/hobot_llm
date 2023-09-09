@@ -17,7 +17,7 @@
 - 地平线RDK为4GB内存版本
 - 地平线RDK已烧录好地平线提供的Ubuntu 20.04系统镜像
 - 修改BPU保留内存大小为1.7GB，修改方法参考[在设备树中设置ion_cam size](https://developer.horizon.ai/api/v1/fileData/documents_rdk/system_software_development/driver_develop_guide/18-Memory_Managment_zh_CN.html#ion-cam-size)，修改 alloc-ranges 和 size 属性中的 0x2a000000 为 0x6a400000
-- 安装transformers，命令为 `pip3 install transformers`
+- 安装transformers，命令为 `pip3 install transformers -i https://pypi.tuna.tsinghua.edu.cn/simple`
 - 更新hobot-dnn，命令为 `sudo apt update; sudo apt install hobot-dnn`
 
 ## 3.2. 安装功能包
