@@ -1,6 +1,6 @@
 # 1. 功能介绍
 
-**hobot_llm** 是地平线RDK平台集成的端侧**Large Language Model (LLM)** Node，用户可在端侧体验LLM。目前提供两种体验方式，一种订阅文本消息，然后将结果以文本方式发布出去，一种直接当前终端输入文本聊天体验。
+**hobot_llm** 是地平线RDK平台集成的端侧**Large Language Model (LLM)** Node，用户可在端侧体验LLM。目前提供两种体验方式，一种订阅文本消息，然后将结果以文本方式发布出去，一种直接终端输入文本聊天体验。
 
 # 2. 物料清单
 
@@ -14,9 +14,8 @@
 
 在体验之前，需要具备以下基本条件：
 
-- 地平线RDK为4GB内存版本
+- 确认地平线RDK为4GB内存版本
 - 地平线RDK已烧录好地平线提供的Ubuntu 20.04系统镜像
-- 修改BPU保留内存大小为1.7GB，修改方法参考[在设备树中设置ion_cam size](https://developer.horizon.ai/api/v1/fileData/documents_rdk/system_software_development/driver_develop_guide/18-Memory_Managment_zh_CN.html#ion-cam-size)，修改 alloc-ranges 和 size 属性中的 0x2a000000 为 0x6a400000
 - 安装transformers，命令为 `pip3 install transformers -i https://pypi.tuna.tsinghua.edu.cn/simple`
 - 更新hobot-dnn，命令为 `sudo apt update; sudo apt install hobot-dnn`
 
@@ -38,7 +37,17 @@ wget http://archive.sunrisepi.tech/llm-model/llm_model.tar.gz
 sudo tar -xf llm_model.tar.gz -C /opt/tros/lib/hobot_llm/
 ```
 
-hobot_llm提供两个运行程序 hobot_llm 和 hobot_llm_chat，其中 hobot_llm 程序订阅 `std_msgs/msg/String` 类型文本消息，送给大模型处理，最后再将结果以 `std_msgs/msg/String` 类型发布出去，hobot_llm_chat 提供终端交互体验，用户可直接输入文本体验大模型。
+同时需要修改BPU保留内存大小为1.7GB，命令如下：
+
+```bash
+# 替换dtb文件
+sudo cp /opt/tros/lib/hobot_llm/config/hobot-dtb/hobot-x3-pi.dtb /boot/hobot/
+
+#重启
+reboot
+```
+
+目前提供两个运行程序 hobot_llm 和 hobot_llm_chat，其中 hobot_llm 程序订阅 `std_msgs/msg/String` 类型文本消息，送给大模型处理，最后再将结果以 `std_msgs/msg/String` 类型发布出去，hobot_llm_chat 提供终端交互体验，用户可直接输入文本体验大模型。
 
 ### 3.3.1. 运行 hobot_llm
 
@@ -98,8 +107,12 @@ hobot_llm 程序接口说明如下：
 
 1. 模型加载失败
 
-    确认开发板内存为4GB，同时设置BPU保留内存大小为1.7GB。
+    确认开发板内存为4GB，同时修改BPU保留内存大小为1.7GB。
 
 2. 输出结果乱码
 
-   确认已使用命令`sudo apt update; sudo apt install hobot-dnn`更新 hobot-dnn
+   确认已使用命令`sudo apt update; sudo apt install hobot-dnn`更新 hobot-dnn。
+
+3. 如何手动修改BPU保留内存为1.7GB？
+
+   修改方法参考[在设备树中设置ion_cam size](https://developer.horizon.ai/api/v1/fileData/documents_rdk/system_software_development/driver_develop_guide/18-Memory_Managment_zh_CN.html#ion-cam-size)，修改 alloc-ranges 和 size 属性中的 0x2a000000 为 0x6a400000。
