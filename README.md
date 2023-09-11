@@ -1,6 +1,6 @@
 # 1. 功能介绍
 
-**hobot_llm** 是地平线RDK平台集成的端侧**Large Language Model (LLM)** Node，用户可在端侧体验LLM。目前提供两种体验方式，一种订阅文本消息，然后将结果以文本方式发布出去，一种直接终端输入文本聊天体验。
+**hobot_llm** 是地平线RDK平台集成的端侧**Large Language Model (LLM)** Node，用户可在端侧体验LLM。目前提供两种体验方式，一种直接终端输入文本聊天体验，一种订阅文本消息，然后将结果以文本方式发布出去。
 
 # 2. 物料清单
 
@@ -50,9 +50,26 @@ sudo cp /opt/tros/lib/hobot_llm/config/hobot-dtb/hobot-x3-pi.dtb /boot/hobot/
 reboot
 ```
 
-目前提供两个运行程序 hobot_llm 和 hobot_llm_chat，其中 hobot_llm 程序订阅 `std_msgs/msg/String` 类型文本消息，送给大模型处理，最后再将结果以 `std_msgs/msg/String` 类型发布出去，hobot_llm_chat 提供终端交互体验，用户可直接输入文本体验大模型。
+重启后调整CPU最高频率为1.5GHz，以及设置调度模式为`performance`，命令如下：
 
-### 3.3.1. 运行 hobot_llm
+```bash
+sudo bash -c 'echo 1 > /sys/devices/system/cpu/cpufreq/boost'
+sudo bash -c 'echo performance > /sys/devices/system/cpu/cpufreq/policy0/scaling_governor'
+```
+
+目前提供两个运行程序 **hobot_llm_chat** 和 **hobot_llm**，其中 **hobot_llm_chat** 提供终端交互体验，用户可直接输入文本体验大模型，**hobot_llm** 程序订阅 `std_msgs/msg/String` 类型文本消息，送给大模型处理，最后再将结果以 `std_msgs/msg/String` 类型发布出去，该程序可串联其他Node，例如将输出文本语音播放出去。
+
+### 3.3.1. 运行 hobot_llm_chat
+
+```bash
+source /opt/tros/setup.bash
+
+ros2 run hobot_llm hobot_llm_chat
+```
+
+程序启动后，可直接在当前终端和机器人聊天。
+
+### 3.3.2. 运行 hobot_llm
 
 1. 启动 hobot_llm
 
@@ -78,19 +95,9 @@ reboot
     ros2 topic pub --once /text_query std_msgs/msg/String "{data: ""中国的首都是哪里""}"
     ```
 
-### 3.3.2. 运行 hobot_llm_chat
-
-```bash
-source /opt/tros/setup.bash
-
-ros2 run hobot_llm hobot_llm_chat
-```
-
-程序启动后，可直接在当前终端和机器人聊天。
-
 # 4. 接口说明
 
-hobot_llm 程序接口说明如下：
+**hobot_llm** 程序接口说明如下：
 
 ## 4.1. 话题
 
