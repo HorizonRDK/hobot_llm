@@ -30,10 +30,13 @@ sudo apt install -y tros-hobot-llm
 
 ## 3.3. 运行程序
 
-运行程序前，需要下载模型文件并解压，相关命令如下：
+运行程序前，需要下载模型文件并解压，命令如下：
 
 ```bash
+# 下载模型文件
 wget http://archive.sunrisepi.tech/llm-model/llm_model.tar.gz
+
+# 解压
 sudo tar -xf llm_model.tar.gz -C /opt/tros/lib/hobot_llm/
 ```
 
@@ -43,7 +46,7 @@ sudo tar -xf llm_model.tar.gz -C /opt/tros/lib/hobot_llm/
 # 替换dtb文件
 sudo cp /opt/tros/lib/hobot_llm/config/hobot-dtb/hobot-x3-pi.dtb /boot/hobot/
 
-#重启
+# 重启
 reboot
 ```
 
