@@ -44,7 +44,7 @@ sudo tar -xf llm_model.tar.gz -C /opt/tros/lib/hobot_llm/
 
 ```bash
 # 替换dtb文件
-sudo cp /opt/tros/lib/hobot_llm/config/hobot-dtb/hobot-x3-pi.dtb /boot/hobot/
+sudo cp /opt/tros/lib/hobot_llm/config/hobot-dtb/*.dtb /boot/hobot/
 
 # 重启
 reboot
