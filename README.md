@@ -40,15 +40,7 @@ wget http://sunrise.horizon.cc/llm-model/llm_model.tar.gz
 sudo tar -xf llm_model.tar.gz -C /opt/tros/lib/hobot_llm/
 ```
 
-同时需要修改BPU保留内存大小为1.7GB，命令如下：
-
-```bash
-# 替换dtb文件
-sudo cp /opt/tros/lib/hobot_llm/config/hobot-dtb/*.dtb /boot/hobot/
-
-# 重启
-reboot
-```
+同时需要修改BPU保留内存大小为1.7GB，设置方法参考[TODO]()。
 
 重启后调整CPU最高频率为1.5GHz，以及设置调度模式为`performance`，命令如下：
 
